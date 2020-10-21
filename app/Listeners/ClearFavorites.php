@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Favorites\Listeners;
 
 use Favorites\Entities\Favorite\Favorite;
@@ -16,6 +16,7 @@ class ClearFavorites extends AJAXListenerBase
 	{
 		parent::__construct();
 		$this->favorites_sync = new SyncAllFavorites;
+		$this->checkNonce();
 		$this->setFormData();
 		$this->clearFavorites();
 		$this->sendResponse();
@@ -45,7 +46,7 @@ class ClearFavorites extends AJAXListenerBase
 			}
 		}
 		$this->favorites_sync->sync($favorites);
-		
+
 		do_action('favorites_after_clear', $this->data['siteid'], $user);
 	}
 

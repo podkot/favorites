@@ -43,7 +43,8 @@ Favorites.Clear = function()
 			datatype: 'json',
 			data: {
 				action : Favorites.formActions.clearall,
-				siteid : site_id
+				siteid: site_id,
+				nonce: Favorites.jsData.nonce
 			},
 			success : function(data){
 				if ( Favorites.jsData.dev_mode ){
@@ -84,7 +85,7 @@ Favorites.Clear = function()
 	plugin.updateClearButtons = function()
 	{
 		var button;
-		var siteid; 
+		var siteid;
 		for ( var i = 0; i < $(Favorites.selectors.clear_button).length; i++ ){
 			button = $(Favorites.selectors.clear_button)[i];
 			siteid = $(button).attr('data-siteid');

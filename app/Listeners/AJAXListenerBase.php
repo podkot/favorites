@@ -40,9 +40,20 @@ abstract class AJAXListenerBase
 	{
 		$error = ( $error ) ? $error : __('There was an error processing the request.', 'favorites');
 		return wp_send_json([
-			'status' => 'error', 
+			'status' => 'error',
 			'message' => $error
 		]);
+	}
+
+	/**
+	* Check nonce
+	*/
+	protected function checkNonce()
+	{
+		if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'simple_favorites_nonce')) {
+			$this->sendError('Nonce');
+			die();
+		}
 	}
 
 	/**
@@ -63,7 +74,7 @@ abstract class AJAXListenerBase
 	{
 		if ( $this->user_repo->consentedToCookies() ) return;
 		return $this->response([
-			'status' => 'consent_required', 
+			'status' => 'consent_required',
 			'message' => $this->settings_repo->consent('modal'),
 			'accept_text' => $this->settings_repo->consent('consent_button_text'),
 			'deny_text' => $this->settings_repo->consent('deny_button_text'),

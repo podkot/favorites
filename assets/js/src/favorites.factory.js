@@ -34,7 +34,7 @@ Favorites.selectors = {
 	modals : 'data-favorites-modal', // Modals
 	consentModal : 'data-favorites-consent-modal', // Consent Modal
 	close_modals : 'data-favorites-modal-close', // Link/Button to close the modals
-	count : '.simplefavorite-button-count', // The count inside the favorites button 
+	count : '.simplefavorite-button-count', // The count inside the favorites button
 	post_favorite_count : 'data-favorites-post-count-id' // The total number of times a post has been favorited
 }
 
@@ -65,7 +65,8 @@ Favorites.jsData = {
 	button_options : favorites_data.button_options, // Custom button options
 	dev_mode : favorites_data.dev_mode, // Is Dev mode enabled
 	logged_in : favorites_data.logged_in, // Is the user logged in
-	user_id : favorites_data.user_id // The current user ID (0 if logged out)
+	user_id: favorites_data.user_id, // The current user ID (0 if logged out)
+	nonce: favorites_data.nonce // WP nonce token
 }
 
 /**

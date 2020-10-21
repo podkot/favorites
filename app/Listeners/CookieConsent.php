@@ -3,7 +3,7 @@ namespace Favorites\Listeners;
 
 use Favorites\Entities\User\UserRepository;
 
-class CookieConsent
+class CookieConsent extends AJAXListenerBase
 {
 	/**
 	* Consented?
@@ -19,6 +19,7 @@ class CookieConsent
 	public function __construct()
 	{
 		$this->user_repo = new UserRepository;
+		$this->checkNonce();
 		$this->setConsent();
 		$this->respond();
 	}

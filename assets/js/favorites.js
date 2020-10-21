@@ -302,7 +302,8 @@ Favorites.Clear = function()
 			datatype: 'json',
 			data: {
 				action : Favorites.formActions.clearall,
-				siteid : site_id
+				siteid: site_id,
+				nonce: Favorites.jsData.nonce
 			},
 			success : function(data){
 				if ( Favorites.jsData.dev_mode ){
@@ -343,7 +344,7 @@ Favorites.Clear = function()
 	plugin.updateClearButtons = function()
 	{
 		var button;
-		var siteid; 
+		var siteid;
 		for ( var i = 0; i < $(Favorites.selectors.clear_button).length; i++ ){
 			button = $(Favorites.selectors.clear_button)[i];
 			siteid = $(button).attr('data-siteid');
@@ -371,6 +372,7 @@ Favorites.Clear = function()
 
 	return plugin.bindEvents();
 }
+
 /**
 * Favorites List functionality
 */
@@ -557,7 +559,8 @@ Favorites.Button = function()
 			postid : plugin.data.post_id,
 			siteid : plugin.data.site_id,
 			status : plugin.data.status,
-			user_consent_accepted : plugin.data.user_consent_accepted
+			user_consent_accepted: plugin.data.user_consent_accepted,
+			nonce: Favorites.jsData.nonce
 		}
 		$.ajax({
 			url: Favorites.jsData.ajaxurl,
@@ -613,7 +616,7 @@ Favorites.Button = function()
 				$(this).attr('data-favoritecount', favorite_count - 1);
 				$(this).find(Favorites.selectors.count).text(favorite_count - 1);
 				return;
-			} 
+			}
 			$(this).addClass(Favorites.cssClasses.active);
 			$(this).attr('data-favoritecount', favorite_count + 1);
 			$(this).find(Favorites.selectors.count).text(favorite_count + 1);
@@ -651,6 +654,7 @@ Favorites.Button = function()
 
 	return plugin.bindEvents();
 }
+
 /**
 * Updates Favorite Buttons as Needed
 */
@@ -1030,13 +1034,15 @@ Favorites.RequireConsent = function()
 			dataType: 'json',
 			data: {
 				action : Favorites.formActions.cookieConsent,
-				consent : consent
+				consent: consent,
+				nonce: Favorites.jsData.nonce
 			}
 		});
 	}
 
 	return plugin.bindEvents();
 }
+
 /**
 * Primary Favorites Initialization
 * @package Favorites
@@ -1073,7 +1079,7 @@ Favorites.selectors = {
 	modals : 'data-favorites-modal', // Modals
 	consentModal : 'data-favorites-consent-modal', // Consent Modal
 	close_modals : 'data-favorites-modal-close', // Link/Button to close the modals
-	count : '.simplefavorite-button-count', // The count inside the favorites button 
+	count : '.simplefavorite-button-count', // The count inside the favorites button
 	post_favorite_count : 'data-favorites-post-count-id' // The total number of times a post has been favorited
 }
 
@@ -1104,7 +1110,8 @@ Favorites.jsData = {
 	button_options : favorites_data.button_options, // Custom button options
 	dev_mode : favorites_data.dev_mode, // Is Dev mode enabled
 	logged_in : favorites_data.logged_in, // Is the user logged in
-	user_id : favorites_data.user_id // The current user ID (0 if logged out)
+	user_id: favorites_data.user_id, // The current user ID (0 if logged out)
+	nonce: favorites_data.nonce // WP nonce token
 }
 
 /**

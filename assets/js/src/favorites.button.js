@@ -62,7 +62,8 @@ Favorites.Button = function()
 			postid : plugin.data.post_id,
 			siteid : plugin.data.site_id,
 			status : plugin.data.status,
-			user_consent_accepted : plugin.data.user_consent_accepted
+			user_consent_accepted: plugin.data.user_consent_accepted,
+			nonce: Favorites.jsData.nonce
 		}
 		$.ajax({
 			url: Favorites.jsData.ajaxurl,
@@ -118,7 +119,7 @@ Favorites.Button = function()
 				$(this).attr('data-favoritecount', favorite_count - 1);
 				$(this).find(Favorites.selectors.count).text(favorite_count - 1);
 				return;
-			} 
+			}
 			$(this).addClass(Favorites.cssClasses.active);
 			$(this).attr('data-favoritecount', favorite_count + 1);
 			$(this).find(Favorites.selectors.count).text(favorite_count + 1);

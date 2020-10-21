@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Favorites\Listeners;
 
 use Favorites\Entities\Favorite\Favorite;
@@ -8,6 +8,7 @@ class FavoriteButton extends AJAXListenerBase
 	public function __construct()
 	{
 		parent::__construct();
+		$this->checkNonce();
 		$this->setFormData();
 		$this->updateFavorite();
 	}
@@ -35,10 +36,10 @@ class FavoriteButton extends AJAXListenerBase
 			$favorite->update($this->data['postid'], $this->data['status'], $this->data['siteid'], $this->data['groupid']);
 			$this->afterUpdateAction();
 			$this->response([
-				'status' => 'success', 
+				'status' => 'success',
 				'favorite_data' => [
-					'id' => $this->data['postid'], 
-					'siteid' => $this->data['siteid'], 
+					'id' => $this->data['postid'],
+					'siteid' => $this->data['siteid'],
 					'status' => $this->data['status'],
 					'groupid' => $this->data['groupid'],
 					'save_type' => $favorite->saveType()
