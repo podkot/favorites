@@ -61,7 +61,13 @@ abstract class AJAXListenerBase
 
     protected function checkSite()
     {
-		if (isset($_POST['siteid']) && get_sites(array('ID' => $_POST['siteid'], 'count' => true))) {
+		if (!isset($_POST['siteid'])) {
+			return;
+		}
+
+		$badSingleSiteId = !is_multisite() && $_POST['siteid'] != '1';
+
+		if ($badSingleSiteId || get_sites(array('ID' => $_POST['siteid'], 'count' => true))) {
 			$this->sendError('Bad siteid');
 			die();
 		}
