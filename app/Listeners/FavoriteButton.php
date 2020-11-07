@@ -9,6 +9,7 @@ class FavoriteButton extends AJAXListenerBase
 	{
 		parent::__construct();
 		$this->checkNonce();
+		$this->checkSite();
 		$this->setFormData();
 		$this->updateFavorite();
 	}

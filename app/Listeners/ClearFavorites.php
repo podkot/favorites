@@ -17,6 +17,7 @@ class ClearFavorites extends AJAXListenerBase
 		parent::__construct();
 		$this->favorites_sync = new SyncAllFavorites;
 		$this->checkNonce();
+		$this->checkSite();
 		$this->setFormData();
 		$this->clearFavorites();
 		$this->sendResponse();
