@@ -66,8 +66,9 @@ abstract class AJAXListenerBase
 		}
 
 		$badSingleSiteId = !is_multisite() && $_POST['siteid'] != '1';
+		$badMultiSiteId  = is_multisite() && get_sites(array('ID' => $_POST['siteid'], 'count' => true)) == 0;
 
-		if ($badSingleSiteId || get_sites(array('ID' => $_POST['siteid'], 'count' => true))) {
+		if ($badSingleSiteId || $badMultiSiteId) {
 			$this->sendError('Bad siteid');
 			die();
 		}
